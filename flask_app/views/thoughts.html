@@ -15,7 +15,7 @@
         <h1>Welcome {{name}}!</h1>
         <a class="button" href="/logout">Logout</a>
       </div>
-     
+
       <div class="add_thought">
         <form action="/post" method="post">
           <div class="group">
@@ -39,10 +39,17 @@
           <p>{{posts[i][3]}}'s says:</p>
         </a>
         <textarea id="post" readonly>{{posts[i][1]}}</textarea>
+        {% if posts[i][2]==current_user%}
         <a href="/delete/{{posts[i][0]}}" class="delete">Delete</a>
-        <a href="/like/{{posts[i][0]}}" class="like">Like</a>
+        {% endif %} 
+        {% if posts_likeds[i][2] == 1 %}
+        <!-- Verifica si el usuario actual ha dado like y muestra el botón "Unlike" -->
         <a href="/unlike/{{posts[i][0]}}" class="unlike">Unlike</a>
-        <p>Likes: {{likes[i][0][1]}}</p>
+        {% else %}
+        <!-- Si no ha dado like, muestra el botón "Like" -->
+        <a href="/like/{{posts[i][0]}}" class="like">Like</a>
+        {% endif %}
+        <p>{{likes[i][0][1]}} Likes</p>
       </div>
       {% endfor %}
     </div>

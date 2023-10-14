@@ -32,3 +32,17 @@ class Likes:
       cursor.execute(sql, thought)
       results = cursor.fetchall()
       return results
+  def get_posts_liked_by_current_user(self, thought, user):
+    sql = """
+        SELECT
+            thoughts_tb.id AS post_id,
+            IFNULL(COUNT(likes_tb.user_id), 0) AS total_likes,
+            IFNULL(MAX(likes_tb.user_id = %s), 0) AS user_liked
+        FROM thoughts_tb
+        LEFT JOIN likes_tb ON thoughts_tb.id = likes_tb.thought_id
+        WHERE thoughts_tb.id = %s
+        GROUP BY thoughts_tb.id;
+        """
+    cursor.execute(sql, (user, thought))
+    results = cursor.fetchall()
+    return results[0]
