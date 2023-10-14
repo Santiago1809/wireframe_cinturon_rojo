@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{url_for('static', filename='user.css')}}">
+  <title>Document</title>
+</head>
+<body>
+  <div class="header">
+    <h1>Welcome {{name}}!</h1>
+    <a href="/thoughts" class="button">Dashboard</a>
+    <a class="button" href="/logout">Logout</a>
+  </div>
+  <hr>
+  <h2>{{posts[0][3]}}'s Thoughts</h2>
+  <div class="posts">
+    {% for i in range(posts|length) %}
+    <div class="post-container">
+      <textarea id="post" readonly>{{posts[i][1]}}</textarea>
+    </div>
+    {% endfor %}
+  </div>
+  
+</body>
+</html>

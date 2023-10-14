@@ -1,0 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=Mukta&display=swap");
+
+* {
+  font-family: "Mukta";
+  overflow-x: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  padding: 10px;
+}
+.button {
+  margin-right: 5rem;
+  margin-top: 0.3rem;
+  cursor: pointer;
+  padding: 0 8px;
+  background: #efefef;
+  border: 1px solid #000;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+.button:nth-child(1) {
+  margin-left: 0;
+}
+.post-container {
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: flex;
+  flex-direction: column; /* Cambia a flex para controlar la alineación vertical */
+  align-items: center; /* Centra verticalmente el contenido */
+}
+
+.post-container textarea {
+  resize: none;
+  width: 60%; /* Ocupa todo el ancho disponible */
+  text-align: center; /* Centra el texto horizontalmente */
+}

@@ -1,4 +1,4 @@
-from flask_app.config.database import cursor
+from flask_app.config.database import cursor, conexion
 
 class Likes:
   
@@ -7,6 +7,7 @@ class Likes:
       sql = "INSERT INTO likes_tb(thought_id, user_id) VALUES(%s, %s)"
       values = [thought, user]
       cursor.execute(sql, values)
+      conexion.commit()
       return 'Like ingresado'
     except Exception as e:
       cursor.connection.rollback()
@@ -18,6 +19,7 @@ class Likes:
       sql = "DELETE FROM likes_tb WHERE thought_id=%s AND user_id=%s"
       values = [thought, user]
       cursor.execute(sql, values)
+      conexion.commit()
       return 'Disike ingresado'
     except Exception as e:
       cursor.connection.rollback()

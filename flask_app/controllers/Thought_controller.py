@@ -27,3 +27,10 @@ class ThoughtController():
             flash('Melos')
         else:
             flash('Error al publicar')
+        return redirect('/thoughts')
+
+    @thoughts.route('/delete/<int:post_id>')
+    def delete(post_id):
+        result = Thought().delete_post(post_id, session.get('id'))
+        print(result)
+        return redirect('/thoughts')

@@ -15,6 +15,7 @@
         <h1>Welcome {{name}}!</h1>
         <a class="button" href="/logout">Logout</a>
       </div>
+     
       <div class="add_thought">
         <form action="/post" method="post">
           <div class="group">
@@ -35,7 +36,7 @@
       {% for i in range(posts|length) %}
       <div class="post-container">
         <a href="/users/{{posts[i][2]}}">
-          <label for="post">{{posts[i][3]}}'s says:</label>
+          <p>{{posts[i][3]}}'s says:</p>
         </a>
         <textarea id="post" readonly>{{posts[i][1]}}</textarea>
         <a href="/delete/{{posts[i][0]}}" class="delete">Delete</a>

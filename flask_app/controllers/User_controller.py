@@ -1,8 +1,11 @@
 import re
+
 from flask import Blueprint, flash, redirect, render_template, request, session
+from werkzeug.security import generate_password_hash
+
 from flask_app.model.User_Model import User
 from flask_app.model.User_model_util import UserUtil
-from werkzeug.security import generate_password_hash
+from flask_app.model.Thought_model import Thought
 user = Blueprint('user', __name__)
 
 class UserController():
@@ -22,12 +25,12 @@ class UserController():
                 flash("Passwords doesn't match") 
             password = generate_password_hash(password)
             user = User(first_name, last_name, email, password, True)
-            session['logged_in'] = True
-            session['name'] = user.first_name + " " + user.last_name
-            session['id'] = UserUtil().get_id(user.email)
             if user.find_user(user.email):
                 flash("User already exists")
             result = user.save_user()
+            session['logged_in'] = True
+            session['name'] = user.first_name + " " + user.last_name
+            session['id'] = UserUtil().get_id(user.email)
             print(result)
             if result == "Usuario guardado con éxito":
               return redirect('/thoughts')
@@ -62,4 +65,7 @@ class UserController():
 
 
 
-
+    @user.route('/users/<int:user>')
+    def get_user(user):
+        posts = Thought().get_thoughts_by_owner(user)
+        return render_template('user.html', posts=posts, name=session.get('name')) if session.get('logged_in') else redirect('/')
