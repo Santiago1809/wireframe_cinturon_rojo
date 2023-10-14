@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Mukta&display=swap");
+
+* {
+  font-family: "Mukta";
+  overflow-x: hidden;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  padding: 10px;
+}
+.above {
+  position: sticky;
+  top: 0;
+}
+
+.button {
+  margin-right: 5rem;
+  margin-top: 0.3rem;
+  cursor: pointer;
+  padding: 0 8px;
+  background: #efefef;
+  border: 1px solid #000;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px;
+  align-items: center;
+}
+
+.add_thought {
+  width: 45vw;
+}
+
+.group input {
+  width: 60%;
+  padding: 0 10px;
+}
+
+.group a {
+  width: 30%;
+}
+
+.post-container {
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr; /* Divide el espacio en tres columnas de diferente ancho */
+  grid-template-rows: 1fr 1fr 1fr; /* Divide el espacio en tres filas de igual alto */
+  grid-gap: 10px; /* Agrega espacio entre las columnas y filas */
+}
+
+.post-container textarea {
+  resize: none;
+}

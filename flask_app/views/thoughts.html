@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='thoughts.css' )}}"
+    />
+    <title>Thoughts</title>
+  </head>
+  <body>
+    <div class="above">
+      <div class="header">
+        <h1>Welcome {{name}}!</h1>
+        <a class="button" href="/logout">Logout</a>
+      </div>
+      <div class="add_thought">
+        <form action="/post" method="post">
+          <div class="group">
+            <input
+              type="text"
+              placeholder="Post a thought here"
+              name="content"
+              required
+              minlength="5"
+            />
+            <button type="submit">Add thougth</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <hr />
+    <div class="posts">
+      {% for i in range(posts|length) %}
+      <div class="post-container">
+        <a href="/users/{{posts[i][2]}}">
+          <label for="post">{{posts[i][3]}}'s says:</label>
+        </a>
+        <textarea id="post" readonly>{{posts[i][1]}}</textarea>
+        <a href="/delete/{{posts[i][0]}}" class="delete">Delete</a>
+        <a href="/like/{{posts[i][0]}}" class="like">Like</a>
+        <a href="/unlike/{{posts[i][0]}}" class="unlike">Unlike</a>
+        <p>Likes: {{likes[i][0][1]}}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </body>
+</html>

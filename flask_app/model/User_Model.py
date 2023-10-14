@@ -1,11 +1,11 @@
-from config.database import cursor
+from flask_app.config.database import cursor, conexion
 
 # La clase representa un usuario con atributos como identificación, nombre, apellido, correo
 # electrónico, contraseña y estado de inicio de sesión, junto con métodos para guardar un usuario en
 # una base de datos y encontrarlo por su identificación.
 class User:
-  def __init__(self, id, first_name, last_name, email, password, logged=False):
-    self.id = id
+  def __init__(self, first_name, last_name, email, password, logged=False):
+
     self.first_name = first_name
     self.last_name = last_name
     self.email = email
@@ -29,20 +29,22 @@ class User:
       self.password
       ]
       cursor.execute(sql, values)
+      conexion.commit()
       return "Usuario guardado con éxito"
     except Exception as e:
       cursor.connection.rollback()
       return f'Erros al guardar el usuario: {str(e)}'
-    finally:
-      cursor.connection.close()
+
   
-  def find_user(self, id:int):
+  def find_user(self, email:str):
     try:
-      sql = "SELECT id, first_name, last_name, email FROM tb_users WHERE id = %s"
-      cursor.execute(sql, id)
+      sql = "SELECT id, first_name, last_name, email FROM tb_users WHERE email = %s"
+      cursor.execute(sql, email)
       resultados = cursor.fetchall()
-      return resultados
-    except Exception as e:
-      return f'Error al encontrar el usuario: {str(e)}'
-    finally:
-      cursor.connection.close()
+      if resultados:
+          return True  # Usuario encontrado
+      else:
+          return False
+    except:
+      return False
+
