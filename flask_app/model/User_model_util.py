@@ -14,10 +14,17 @@ class UserUtil():
       return False
   
   def check_password(self, password, email):
-    sql = "SELECT password FROM tb_user WHERE email=%s"
-    cursor.execute(sql, email)
-    result = cursor.fetchone()
-    return True if check_password_hash(result[0], password) else False
+    try:
+      sql = "SELECT password FROM tb_user WHERE email=%s"
+      cursor.execute(sql, email)
+      result = cursor.fetchall()
+      result = result[0][0]
+      check = check_password_hash(result, password)
+      if check:
+        return True
+      return False
+    except Exception as e:
+      return str(e)
   
   def get_name(self, email):
      sql = "SELECT CONCAT(first_name, ' ', last_name) FROM tb_user WHERE email=%s"
