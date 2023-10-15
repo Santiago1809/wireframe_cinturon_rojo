@@ -20,7 +20,7 @@ class Conexion:
   def export(self):
     return self.conexion, self.cursor
   
-conexion = conexion = Conexion('wireframe.c9tvhyzjxvyt.us-east-2.rds.amazonaws.com',3306, 'admin', 'Santiago2', 'wireframe')
+conexion = conexion = Conexion('wireframe.c9tvhyzjxvyt.us-east-2.rds.amazonaws.com',3306, 'admin', 'Santiago2', 'wireframe_cinturon_rojo')
 conexion.conectar()
 
 conexion, cursor = conexion.export()
